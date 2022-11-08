@@ -1,0 +1,12 @@
+pytest
+psycopg2
+flask
+flask-restful
+flask-injector
+flask-sqlalchemy
+flask-jwt-extended
+flask-swagger
+gunicorn
+flask_bcrypt
+requests
+werkzeug

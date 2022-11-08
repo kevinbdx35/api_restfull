@@ -1,0 +1,102 @@
+definitions:
+  Code:
+    properties:
+      files:
+        description: file of code or dll
+        type: text or binary
+    required:
+      - valid token
+  User:
+    properties:
+      email:
+        description: email for user
+        type: string
+      first_name:
+        description: firstname for user
+        type: string
+      last_name:
+        description: last name for user
+        type: string
+      password:
+        description: password for user
+        type: string
+    required:
+      - email
+      - password
+info:
+  title: Cool product name
+  version: 0.0.0
+paths:
+  /exercises/{eid}/submit:
+    post:
+      description: ''
+      parameters:
+        - in: body
+          name: files
+          schema:
+            $ref: '#/definitions/Code'
+      responses:
+        '200':
+          description: code submitted
+      summary: Submit a new code
+      tags:
+        - codes
+  /users:
+    get:
+      description: ''
+      parameters:
+        - in: none
+          name: none
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: return user
+        '401':
+          description: return error
+      summary: Access a user informations
+      tags:
+        - users
+    post:
+      description: ''
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: User created
+      summary: Create a new user
+      tags:
+        - users
+  /users/{uid}:
+    get:
+      description: ''
+      parameters:
+        - in: none
+          name: none
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: return user
+        '401':
+          description: return error
+      summary: Access a user informations
+      tags:
+        - users
+    post:
+      description: ''
+      parameters:
+        - in: body
+          name: body
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        '201':
+          description: User created
+      summary: Create a new user
+      tags:
+        - users
+swagger: '2.0'
