@@ -89,3 +89,9 @@ Each group must submit:
 
 ## Idea of this project
 * Ihab ABADAI - Utopios
+
+## Improvements
+
+- Replaced `@app.before_first_request` (removed in Flask 3.0) with `db.init_app(app)` + `with app.app_context(): db.create_all()`
+- Fixed typo in comment: "fro JWT" → "for JWT"
+- Removed 3 dead commented-out lines of code

@@ -27,7 +27,7 @@ import os
 
 def __configure_api(mode):
     """
-    Parse configuration parameters from json conf file to return url to database and secret key fro JWT
+    Parse configuration parameters from json conf file to return url to database and secret key for JWT
 
     :param mode: change environment to mode
     :return: url_2_postgres_database, jwt_key
@@ -55,14 +55,9 @@ def create_app(mode):
     jwt = JWTManager(app)
     api = Api(app)
 
-    @app.before_first_request
-    def __initialize_db():
-        """
-        Initialize database before the first request for further use
-        :return: None
-        """
-        from src.api.utils.database import db
-        db.init_app(app)
+    from src.api.utils.database import db
+    db.init_app(app)
+    with app.app_context():
         db.create_all()
 
     # ressources exerices, user, login, admin
@@ -78,9 +73,6 @@ def create_app(mode):
         binder.bind(UserServices, to=UserServices, scope=request)
         binder.bind(CodeServices, to=CodeServices, scope=request)
         binder.bind(ExerciseServices, to=ExerciseServices, scope=request)
-        # binder.bind(UserRepository, to=UserRepository, scope=request)
-        # binder.bind(GenericRepository, to=GenericRepository, scope=request)
-        # binder.bind(ExerciceRepository, to=ExerciceRepository, scope=request)
 
     FlaskInjector(app=app, modules=[inject_configuration])
 
